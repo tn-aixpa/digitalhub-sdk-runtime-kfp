@@ -11,7 +11,7 @@ from typing import Any
 from digitalhub.entities._commons.enums import State
 from digitalhub.utils.logger import LOGGER
 
-from digitalhub_runtime_kfp.dsl import label_prefix
+from digitalhub_runtime_kfp.dsl import LABEL_PREFIX
 
 if typing.TYPE_CHECKING:
     from kfp import Client
@@ -170,12 +170,12 @@ def _node_to_graph(id: str, run_detail: ApiRunDetail, node: dict, templates: lis
     for template in templates:
         if "container" in template and template["name"] == node["displayName"]:
             labels = template["metadata"]["labels"] if "labels" in template["metadata"] else {}
-            if label_prefix + "function" in labels:
-                res["function"] = labels[label_prefix + "function"]
-            if label_prefix + "function_id" in labels:
-                res["function_id"] = labels[label_prefix + "function_id"]
-            if label_prefix + "action" in labels:
-                res["action"] = labels[label_prefix + "action"]
+            if LABEL_PREFIX + "function" in labels:
+                res["function"] = labels[LABEL_PREFIX + "function"]
+            if LABEL_PREFIX + "function_id" in labels:
+                res["function_id"] = labels[LABEL_PREFIX + "function_id"]
+            if LABEL_PREFIX + "action" in labels:
+                res["action"] = labels[LABEL_PREFIX + "action"]
 
     # run_id
     if node["type"] == "Pod" and "outputs" in node:

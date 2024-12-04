@@ -162,7 +162,7 @@ class PipelineContext:
 
         cop = dsl.ContainerOp(
             name=name,
-            image=WKFL_IMG,
+            image=WORKFLOW_IMAGE,
             command=cmd,
             file_outputs=file_outputs,
         )
