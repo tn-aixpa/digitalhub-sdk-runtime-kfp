@@ -51,7 +51,6 @@ class RunKfpRun(Run):
             for _, v in inputs.items():
                 self.add_relationship(
                     relation=Relationship.CONSUMES.value,
-                    source=self.key + f":{self.id}",
                     dest=v.get("key"),
                 )
         self.save(update=True)
