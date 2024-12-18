@@ -15,7 +15,13 @@ from digitalhub.utils.generic_utils import decode_base64_string, extract_archive
 from digitalhub.utils.git_utils import clone_repository
 from digitalhub.utils.logger import LOGGER
 from digitalhub.utils.s3_utils import get_bucket_and_key, get_s3_source
-from digitalhub.utils.uri_utils import has_git_scheme, has_remote_scheme, has_s3_scheme
+from digitalhub.utils.uri_utils import (
+    get_filename_from_uri,
+    has_git_scheme,
+    has_remote_scheme,
+    has_s3_scheme,
+    has_zip_scheme,
+)
 
 if typing.TYPE_CHECKING:
     from digitalhub.entities.workflow._base.entity import Workflow
@@ -78,19 +84,28 @@ def save_workflow_source(path: Path, source_spec: dict) -> str:
         base64_path.write_text(decode_base64_string(base64))
         return base64_path
 
+    if source is None:
+        raise RuntimeError("Function source not found in spec.")
+
     # Git repo
     if has_git_scheme(source):
         clone_repository(path, source)
 
     # Http(s) or s3 presigned urls
     elif has_remote_scheme(source):
-        filename = path / "archive.zip"
+        if has_zip_scheme(source):
+            filename = path / get_filename_from_uri(source)
+            source = source.removeprefix("zip+")
+        else:
+            filename = path / "archive.zip"
         requests_chunk_download(source, filename)
         extract_archive(path, filename)
 
     # S3 path
     elif has_s3_scheme(source):
-        filename = path / "archive.zip"
+        if not has_zip_scheme(source):
+            raise RuntimeError("S3 source must be a zip file with scheme zip+s3://.")
+        filename = path / get_filename_from_uri(source)
         bucket, key = get_bucket_and_key(source)
         get_s3_source(bucket, key, filename)
         extract_archive(path, filename)
