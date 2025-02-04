@@ -174,6 +174,4 @@ class PipelineContext:
             cop.add_pod_label(LABEL_PREFIX + "workflow", workflow)
             cop.add_pod_label(LABEL_PREFIX + "workflow_id", workflow_object.id)
         cop.add_pod_label(LABEL_PREFIX + "action", action)
-
-        cop.container.add_env_variable(k8s_client.V1EnvVar(name=DhcoreEnvVar.ENDPOINT.value, value=ENDPOINT))
         return cop
