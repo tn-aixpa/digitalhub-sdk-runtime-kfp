@@ -20,7 +20,7 @@
       "inputs": {
         "di": "store://demo-etl/dataitem/dataitem/dataitem1:fd83dqa7vnh-73e45-m3pqawew"
       },
-      "function": "kfp://demo-etl/workflow1:77fcf9d1-3fb6-4117-9cba-e500f1223e59",
+      "workflow": "kfp://demo-etl/workflow1:77fcf9d1-3fb6-4117-9cba-e500f1223e59",
       "profile": "2xa6000",
       "source": {
         "source": "main.py",
