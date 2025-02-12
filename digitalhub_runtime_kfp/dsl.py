@@ -8,7 +8,6 @@ import digitalhub as dh
 from digitalhub.client.dhcore.enums import DhcoreEnvVar
 from digitalhub.runtimes.enums import RuntimeEnvVar
 from kfp import dsl
-from kubernetes import client as k8s_client
 
 LABEL_PREFIX = "kfp-digitalhub-runtime-"
 PROJECT = os.environ.get(RuntimeEnvVar.PROJECT.value)
