@@ -27,6 +27,9 @@ dependencies = [
 local = [
     "kfp==1.8.11",
 ]
+dev = [
+    "digitalhub[dev]>=0.10.0b, <0.11"
+]
 
 [project.urls]
 Homepage = "https://github.com/scc-digitalhub/digitalhub-sdk"
