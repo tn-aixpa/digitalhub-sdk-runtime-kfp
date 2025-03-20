@@ -5,8 +5,8 @@ import os
 from contextlib import contextmanager
 
 import digitalhub as dh
-from digitalhub.client.dhcore.enums import DhcoreEnvVar
 from digitalhub.runtimes.enums import RuntimeEnvVar
+from digitalhub.stores.client.dhcore.enums import DhcoreEnvVar
 from kfp import dsl
 
 LABEL_PREFIX = "kfp-digitalhub-runtime-"
