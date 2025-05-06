@@ -26,7 +26,6 @@ class RunSpecKfpRun(RunSpec):
         image: str | None = None,
         tag: str | None = None,
         handler: str | None = None,
-        schedule: str | None = None,
         replicas: int | None = None,
         inputs: dict | None = None,
         outputs: dict | None = None,
@@ -55,7 +54,6 @@ class RunSpecKfpRun(RunSpec):
         self.image = image
         self.tag = tag
         self.handler = handler
-        self.schedule = schedule
         self.replicas = replicas
         self.inputs = inputs
         self.outputs = outputs
@@ -71,9 +69,6 @@ class RunValidatorKfpRun(RunValidator):
     image: str = None
     tag: str = None
     handler: str = None
-
-    # Pipeline parameters
-    schedule: str = None
 
     # Run parameters
     inputs: dict = None
