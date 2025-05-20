@@ -7,7 +7,7 @@ from digitalhub.stores.data.api import get_store
 from digitalhub.stores.data.utils import get_default_store
 from digitalhub.utils.exceptions import EntityError
 from digitalhub.utils.file_utils import eval_py_type, eval_zip_type
-from digitalhub.utils.generic_utils import encode_source, encode_string
+from digitalhub.utils.generic_utils import carriage_return_warn, encode_source, encode_string
 from digitalhub.utils.uri_utils import has_local_scheme
 
 from digitalhub_runtime_kfp.entities.workflow.kfp.models import SourceLang
@@ -129,7 +129,9 @@ def source_post_check(exec: WorkflowKfp) -> WorkflowKfp:
     if has_local_scheme(code_src) and Path(code_src).is_file():
         # Check py
         if eval_py_type(code_src):
-            exec.spec.source["base64"] = encode_source(code_src)
+            encoded_source = encode_source(code_src)
+            carriage_return_warn(encoded_source)
+            exec.spec.source["base64"] = encoded_source
             return exec
 
         # Check zip
