@@ -30,15 +30,9 @@ class PipelineContext:
         function: str | None = None,
         workflow: str | None = None,
         action: str | None = None,
-        node_selector: list[dict] | None = None,
-        volumes: list[dict] | None = None,
-        resources: list[dict] | None = None,
-        env: list[dict] | None = None,
-        secrets: list[str] | None = None,
         inputs: dict | None = None,
         outputs: dict | None = None,
         parameters: dict | None = None,
-        values: list | None = None,
         **kwargs,
     ) -> dsl.ContainerOp:
         """
@@ -60,24 +54,12 @@ class PipelineContext:
             The Args workflow to execute. Either function or workflow must be provided.
         action : str
             The name of the action to execute. May be omitted in case of workflow execution (defaulting to 'pipeline').
-        node_selector : list[dict]
-            A list of node selectors for the step.
-        volumes : list[dict]
-            A list of volumes for the step.
-        resources : list[dict]
-            A list of resource requirements for the step.
-        env : list[dict]
-            A list of environment variables for the step.
-        secrets : list[str]
-            A list of secret names for the step.
         inputs : dict
             A list of complex input parameters.
         outputs : dict
             A list of complex output parameters.
         parameters : dict
             A list of simple input parameters.
-        values : list
-            A list of simple output parameters.
         kwargs : dict
             Additional keyword arguments to pass to the step.
 
@@ -86,19 +68,14 @@ class PipelineContext:
         dsl.ContainerOp
             A KFP ContainerOp for the step.
         """
-        props = {
-            "node_selector": node_selector,
-            "volumes": volumes,
-            "resources": resources,
-            "env": env,
-            "secrets": secrets,
-        }
-        props = {k: v for k, v in props.items() if v}
+        if kwargs is None:
+            kwargs = {}
+        props = {**kwargs}
+        props = {k: v for k, v in props.items() if v is not None}
 
         parameters = {} if parameters is None else parameters
         inputs = {} if inputs is None else inputs
         outputs = {} if outputs is None else outputs
-        values = [] if values is None else values
 
         if function is None and workflow is None:
             raise RuntimeError("Either function or workflow must be provided.")
@@ -113,10 +90,6 @@ class PipelineContext:
                 raise RuntimeError(f"Workflow {workflow} not found")
             if action is None:
                 action = "pipeline"
-
-        args = {}
-        if kwargs is not None:
-            args.update(kwargs)
 
         file_outputs = {"run_id": "/tmp/run_id"}
 
@@ -134,9 +107,6 @@ class PipelineContext:
             "--jsonprops",
             json.dumps(props),
         ]
-        # simple input parameters and kwargs
-        for param, val in args.items():
-            cmd += ["-a", f"{param}={val}"]
 
         # complex input parameters
         for param, val in inputs.items():
@@ -154,10 +124,6 @@ class PipelineContext:
             else:
                 oname = str(val)
             file_outputs[oname.replace(".", "_")] = f"/tmp/entity_{oname}"  # not using path.join to avoid windows "\"
-
-        for param in values:
-            cmd += ["-ov", f"{param}"]
-            file_outputs[param.replace(".", "_")] = f"/tmp/value_{val}"  # not using path.join to avoid windows "\"
 
         cop = dsl.ContainerOp(
             name=name,
