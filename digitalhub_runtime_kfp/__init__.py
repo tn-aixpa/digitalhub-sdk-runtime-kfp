@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: © 2025 DSLab - Fondazione Bruno Kessler
+#
 # SPDX-License-Identifier: Apache-2.0
 from digitalhub_runtime_kfp.entities._commons.enums import EntityKinds
 from digitalhub_runtime_kfp.entities.run.kfp_run.builder import RunKfpRunBuilder
