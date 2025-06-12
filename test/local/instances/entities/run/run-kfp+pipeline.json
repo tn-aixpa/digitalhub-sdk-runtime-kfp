@@ -15,7 +15,7 @@
     "spec": {
       "outputs": {},
       "image": "debian",
-      "schedule": "5 4 * * *",
+
       "task": "kfp+pipeline://demo-etl/77fcf9d1-3fb6-4117-9cba-e500f1223e59",
       "inputs": {
         "di": "store://demo-etl/dataitem/dataitem/dataitem1:fd83dqa7vnh-73e45-m3pqawew"
@@ -265,7 +265,7 @@
                 }
               }
             },
-            "schedule": "5 4 * * *",
+
             "successfulJobsHistoryLimit": 3,
             "suspend": false
           }
