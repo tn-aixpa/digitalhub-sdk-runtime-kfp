@@ -1,7 +1,7 @@
 {
     "id": "213ce83a-8f51-4424-bf56-13ad54595a22",
     "key": "store://demo-etl/run/kfp+run/213ce83a-8f51-4424-bf56-13ad54595a22",
-    "kind": "kfp+run",
+    "kind": "kfp+pipeline:run",
     "metadata": {
       "name": "213ce83a-8f51-4424-bf56-13ad54595a22",
       "updated_by": "digitalhubdev",
@@ -34,17 +34,9 @@
       },
       "local_execution": false,
       "resources": {
-        "cpu": {
-          "requests": "0100m",
-          "limits": "0200m"
-        },
-        "mem": {
-          "requests": "0100Ki",
-          "limits": "0200Ki"
-        },
-        "gpu": {
-          "limits": "01"
-        }
+        "cpu": "1",
+        "mem": "1Gi",
+        "gpu": "1"
       },
       "envs": [
         {

@@ -1,11 +1,11 @@
 # DigitalHub SDK Runtime Kfp
 
-[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/tn-aixpa/digitalhub-sdk-runtime-kfp/LICENSE) ![GitHub Release](https://img.shields.io/github/v/release/tn-aixpa/digitalhub-sdk-runtime-kfp)
+[![license](https://img.shields.io/badge/license-Apache%202.0-blue)](https://github.com/scc-digitalhub/digitalhub-sdk-runtime-kfp/LICENSE) ![GitHub Release](https://img.shields.io/github/v/release/scc-digitalhub/digitalhub-sdk-runtime-kfp)
 ![Status](https://img.shields.io/badge/status-stable-gold)
 
-The Digitalhub SDK Runtime Kfp is a runtime extension for the [Digitalhub SDK](https://github.com/tn-aixpa/digitalhub-sdk). It enables you to define, build and deploy Argo Workflows in the Digitalhub platform.
+The Digitalhub SDK Runtime Kfp is a runtime extension for the [Digitalhub SDK](https://github.com/scc-digitalhub/digitalhub-sdk). It enables you to define, build and deploy Argo Workflows in the Digitalhub platform.
 
-Explore the full documentation at the [link](https://scc-digitalhub.github.io/sdk-docs/runtimes/kfp/).
+Explore the full documentation at the [link](https://scc-digitalhub.github.io/sdk-docs/reference/runtimes/).
 
 ## Quick start
 

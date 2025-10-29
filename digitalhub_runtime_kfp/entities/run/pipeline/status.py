@@ -4,10 +4,10 @@
 
 from __future__ import annotations
 
-from digitalhub.entities.task._base.status import TaskStatus
+from digitalhub_runtime_kfp.entities.run._base.status import RunStatusKfpRun
 
 
-class TaskStatusKfpBuild(TaskStatus):
+class RunStatusKfpRunPipeline(RunStatusKfpRun):
     """
-    TaskStatusKfpBuild status.
+    RunStatusKfpRunPipeline status.
     """
